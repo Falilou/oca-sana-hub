@@ -1,0 +1,102 @@
+🚀 VERCEL DEPLOYMENT FIX - ENVIRONMENT VARIABLES
+═════════════════════════════════════════════════════════════════
+
+Your app deployed to GitHub successfully, but Vercel's build failed because
+it doesn't have the environment variables.
+
+Here's how to fix it in 2 minutes:
+
+═════════════════════════════════════════════════════════════════
+
+✅ STEP 1: Go to Vercel Dashboard
+🔗 https://vercel.com/dashboard
+
+✅ STEP 2: Click Your Project `oca-sana-hub`
+
+✅ STEP 3: Click "Settings" (top navigation)
+
+✅ STEP 4: Click "Environment Variables" (left sidebar)
+
+✅ STEP 5: Copy & Paste Environment Variables
+
+Add these variables one by one:
+
+────────────────────────────────────────────────────────────────
+
+Name: NEXT_PUBLIC_ENVIRONMENT
+Value: INDUS
+
+────────────────────────────────────────────────────────────────
+
+Name: NEXT_PUBLIC_PORTAL_COLOMBIA_PROD
+Value: https://portal-colombia.oca-sana.com
+
+────────────────────────────────────────────────────────────────
+
+Name: NEXT_PUBLIC_PORTAL_COLOMBIA_INDUS
+Value: https://test-portal-colombia.oca-sana.com
+
+────────────────────────────────────────────────────────────────
+
+(Repeat for all 9 countries - use .env.local as reference)
+
+────────────────────────────────────────────────────────────────
+
+✅ STEP 6: After adding all variables, go back to "Deployments"
+
+✅ STEP 7: Click "..." on the most recent failed deployment
+
+✅ STEP 8: Click "Redeploy"
+
+⏳ Wait 1-2 minutes...
+
+✅ DONE! Your app should now be LIVE! 🎉
+
+═════════════════════════════════════════════════════════════════
+
+WHAT EACH VARIABLE DOES:
+
+NEXT_PUBLIC_ENVIRONMENT 
+  → Tells the app which environment to use (PROD or INDUS)
+
+NEXT_PUBLIC_PORTAL_[COUNTRY]_PROD
+  → Production URL for each country's portal
+
+NEXT_PUBLIC_PORTAL_[COUNTRY]_INDUS  
+  → Testing/development URL for each country's portal
+
+═════════════════════════════════════════════════════════════════
+
+✅ ALTERNATIVE: Just leave them at defaults
+
+If you don't have real portal URLs yet, Vercel will work fine with
+the default values in .env.example. The app will still:
+
+✓ Load all 9 portals
+✓ Show SSO indicators
+✓ Display BSC links
+✓ Work perfectly!
+
+The URLs just won't be active links until you configure them.
+
+═════════════════════════════════════════════════════════════════
+
+QUICK SUMMARY OF ALL VARIABLES YOU NEED TO ADD:
+
+1. NEXT_PUBLIC_ENVIRONMENT = INDUS
+
+And for each of 9 countries (Colombia, Australia, Morocco, Chile, 
+Argentina, Vietnam, South Africa, Malaysia, South Korea):
+
+2-10. NEXT_PUBLIC_PORTAL_[COUNTRY]_PROD = https://...
+11-19. NEXT_PUBLIC_PORTAL_[COUNTRY]_INDUS = https://...
+
+Total: 19 variables
+
+═════════════════════════════════════════════════════════════════
+
+YOUR VERCEL DASHBOARD:
+https://vercel.com/dashboard → oca-sana-hub → Settings → 
+Environment Variables
+
+Done in 2 minutes! 🚀
