@@ -1,0 +1,220 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+  --background: #0f172a;
+  --foreground: #f1f5f9;
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --secondary: #64748b;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --border: #334155;
+  --card-bg: #1e293b;
+  --sidebar-bg: #1e293b;
+  --header-bg: #1e293b;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sora);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+html.light {
+  color-scheme: light;
+  --background: #f8f9fa;
+  --foreground: #1e293b;
+  --card-bg: #ffffff;
+  --sidebar-bg: #ffffff;
+  --header-bg: #ffffff;
+  --border: #e2e8f0;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth transitions */
+* {
+  @apply transition-colors duration-200;
+}
+
+/* Custom animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out forwards;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+.animate-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.animate-delay-2 {
+  animation-delay: 0.2s;
+}
+
+.animate-delay-3 {
+  animation-delay: 0.3s;
+}
+
+.animate-delay-4 {
+  animation-delay: 0.4s;
+}
+
+.animate-delay-5 {
+  animation-delay: 0.05s;
+}
+
+.animate-delay-6 {
+  animation-delay: 0.1s;
+}
+
+.animate-delay-7 {
+  animation-delay: 0.15s;
+}
+
+.animate-delay-8 {
+  animation-delay: 0.2s;
+}
+
+.animate-delay-9 {
+  animation-delay: 0.25s;
+}
+
+.animate-delay-10 {
+  animation-delay: 0.3s;
+}
+
+.animate-delay-11 {
+  animation-delay: 0.35s;
+}
+
+.animate-delay-12 {
+  animation-delay: 0.4s;
+}
+
+.animate-delay-13 {
+  animation-delay: 0.45s;
+}
+
+.pulse-delay-1 {
+  animation-delay: 1s;
+}
+
+.pulse-delay-2 {
+  animation-delay: 2s;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Print styles for executive reports */
+@media print {
+  @page {
+    size: A4;
+    margin: 1.5cm;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Hide navigation and interactive elements */
+  header,
+  button,
+  input,
+  select,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Show only executive view content */
+  .print-only {
+    display: block !important;
+  }
+
+  /* Optimize colors for print */
+  * {
+    background: white !important;
+    color: black !important;
+    border-color: #ccc !important;
+  }
+
+  /* Keep important colored elements */
+  .text-red-400,
+  .text-red-300 {
+    color: #dc2626 !important;
+  }
+
+  .text-yellow-400,
+  .text-yellow-300 {
+    color: #ca8a04 !important;
+  }
+
+  .text-green-400,
+  .text-green-300 {
+    color: #16a34a !important;
+  }
+
+  .text-cyan-400,
+  .text-cyan-300 {
+    color: #0891b2 !important;
+  }
+
+  .text-blue-400,
+  .text-blue-300 {
+    color: #2563eb !important;
+  }
+
+  /* Page breaks */
+  .print-break-before {
+    page-break-before: always;
+  }
+
+  .print-break-after {
+    page-break-after: always;
+  }
+
+  /* Prevent breaks inside elements */
+  div,
+  table,
+  ul,
+  ol {
+    page-break-inside: avoid;
+  }
+}

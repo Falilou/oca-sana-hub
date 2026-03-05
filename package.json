@@ -1,0 +1,98 @@
+{
+  "name": "oca_sana_hub",
+  "version": "1.1.0",
+  "description": "OCA Sana Hub - Enterprise Portal Management System with 9 Country Support, SSO Authentication, ERP Integration, Executive Dashboard & Real-time Analytics",
+  "author": "OCA Development Team",
+  "private": true,
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "node --max-old-space-size=4096 node_modules/next/dist/bin/next dev",
+    "dev:turbo": "node --max-old-space-size=4096 node_modules/next/dist/bin/next dev --turbopack",
+    "build": "node --max-old-space-size=4096 node_modules/next/dist/bin/next build",
+    "start": "next start",
+    "lint": "eslint",
+    "clean": "rd /s /q .next node_modules",
+    "reinstall": "npm run clean && npm install",
+    "standalone:export": "cross-env NEXT_PUBLIC_STANDALONE_MODE=true next build",
+    "standalone:dev": "concurrently \"cross-env NEXT_PUBLIC_STANDALONE_MODE=true npm run dev\" \"wait-on http://localhost:3000 && electron .\"",
+    "standalone:build": "npm run standalone:export && electron-builder",
+    "standalone:build:win": "npm run standalone:export && electron-builder --win",
+    "standalone:build:mac": "npm run standalone:export && electron-builder --mac",
+    "standalone:build:linux": "npm run standalone:export && electron-builder --linux"
+  },
+  "build": {
+    "appId": "com.oca.sanahub",
+    "productName": "OCA Sana Hub",
+    "directories": {
+      "output": "dist-electron"
+    },
+    "files": [
+      "electron/**/*",
+      ".next/**/*",
+      "node_modules/**/*",
+      "public/**/*",
+      "next.config.ts",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "public/oca-logo.png"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "public/oca-logo.png",
+      "category": "public.app-category.business"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "icon": "public/oca-logo.png",
+      "category": "Office"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "jszip": "^3.10.1",
+    "next": "16.1.6",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "recharts": "^3.7.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/archiver": "^7.0.0",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
+    "electron": "^40.6.1",
+    "electron-builder": "^26.8.1",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.6",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "wait-on": "^9.0.4"
+  }
+}

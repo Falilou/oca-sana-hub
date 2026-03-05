@@ -1,0 +1,97 @@
+{
+  "colombia": {
+    "PROD": {
+      "public": "https://orderingportal.co.michelingroup.com/",
+      "admin": "https://orderingportal.co.michelingroup.com/admin",
+      "ssoAdminEnabled": true
+    },
+    "INDUS": {
+      "public": "https://colombiamichelinbeta.sana-cloud.net/",
+      "admin": "https://colombiamichelinbeta.sana-cloud.net/admin"
+    }
+  },
+  "australia": {
+    "PROD": {
+      "public": "https://orderingportal.au.michelingroup.com/",
+      "admin": "https://orderingportal.au.michelingroup.com/admin",
+      "ssoAdminEnabled": true,
+      "ssoSalesforceEnabled": true
+    },
+    "INDUS": {
+      "public": "https://australiamichelinbeta.sana-cloud.net/",
+      "admin": "https://australiamichelinbeta.sana-cloud.net/admin"
+    }
+  },
+  "morocco": {
+    "PROD": {
+      "public": "",
+      "admin": ""
+    },
+    "INDUS": {
+      "public": "https://michelinmoroccobeta.sana-cloud.net/",
+      "admin": "https://michelinmoroccobeta.sana-cloud.net/admin",
+      "ssoAdminEnabled": true
+    }
+  },
+  "chile": {
+    "PROD": {
+      "public": "",
+      "admin": ""
+    },
+    "INDUS": {
+      "public": "",
+      "admin": ""
+    }
+  },
+  "argentina": {
+    "PROD": {
+      "public": "",
+      "admin": ""
+    },
+    "INDUS": {
+      "public": "",
+      "admin": ""
+    }
+  },
+  "vietnam": {
+    "PROD": {
+      "public": "",
+      "admin": ""
+    },
+    "INDUS": {
+      "public": "",
+      "admin": ""
+    }
+  },
+  "southAfrica": {
+    "PROD": {
+      "public": "",
+      "admin": ""
+    },
+    "INDUS": {
+      "public": "",
+      "admin": ""
+    }
+  },
+  "malaysia": {
+    "PROD": {
+      "public": "",
+      "admin": ""
+    },
+    "INDUS": {
+      "public": "",
+      "admin": ""
+    }
+  },
+  "southKorea": {
+    "PROD": {
+      "public": "",
+      "admin": ""
+    },
+    "INDUS": {
+      "public": "https://michelinkoreabeta.sana-cloud.net/",
+      "admin": "https://michelinkoreabeta.sana-cloud.net/admin",
+      "ssoAdminEnabled": true
+    }
+  }
+}

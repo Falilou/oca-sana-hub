@@ -1,0 +1,459 @@
+================================================================================
+                    DESKTOP STANDALONE - WORKFLOW
+================================================================================
+
+
+YOUR STEPS (Developer)                    COLLEAGUE'S STEPS (End User)
+==================                        =========================
+
+┌─────────────────────┐
+│  1. Run Build       │
+│  build-standalone   │
+│  .bat               │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│  2. Wait 5-10 min   │
+│  Packages building  │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│  3. Get .exe files  │
+│  from dist-electron │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│  4. Share .exe      │
+│  + USER_GUIDE.md    │
+└──────────┬──────────┘
+           │
+           │ (Email/USB/Network)
+           │
+           ▼                               ┌─────────────────────┐
+      File Transfer ────────────────────▶  │ 1. Receive .exe     │
+                                           └──────────┬──────────┘
+                                                      │
+                                                      ▼
+                                           ┌─────────────────────┐
+                                           │ 2. Double-click     │
+                                           │    to run           │
+                                           └──────────┬──────────┘
+                                                      │
+                                                      ▼
+                                           ┌─────────────────────┐
+                                           │ 3. See Dashboard    │
+                                           │    with 9 portals   │
+                                           └──────────┬──────────┘
+                                                      │
+                                                      ▼
+                                           ┌─────────────────────┐
+                                           │ 4. Click country    │
+                                           │    Access portal!   │
+                                           └─────────────────────┘
+
+
+================================================================================
+                         WHAT GETS HIDDEN
+================================================================================
+
+WEB VERSION (Full Features)          DESKTOP STANDALONE (Presentation)
+=======================              =================================
+
+╔══════════════════════╗             ╔══════════════════════╗
+║   Header with        ║             ║   Header with        ║
+║   Environment ⚙️      ║             ║   Environment ⚙️      ║
+╠══════════════════════╣             ╠══════════════════════╣
+║ Sidebar:             ║             ║ Sidebar:             ║
+║  📊 Dashboard        ║             ║  📊 Dashboard        ║
+║  📝 Log Analysis  ← SHOWN          ║  ⚙️  Settings        ║
+║  📈 Analytics     ← SHOWN          ║                      ║
+║  ⚙️  Settings        ║             ║  (Clean & Simple!)   ║
+╠══════════════════════╣             ╠══════════════════════╣
+║                      ║             ║                      ║
+║  Portal Cards        ║             ║  Portal Cards        ║
+║  🇨🇴 🇦🇺 🇲🇦 🇨🇱       ║             ║  🇨🇴 🇦🇺 🇲🇦 🇨🇱       ║
+║  🇦🇷 🇻🇳 🇿🇦 🇲🇾       ║             ║  🇦🇷 🇻🇳 🇿🇦 🇲🇾       ║
+║  🇰🇷                  ║             ║  🇰🇷                  ║
+║                      ║             ║                      ║
+╚══════════════════════╝             ╚══════════════════════╝
+
+
+================================================================================
+                        BUILD PROCESS FLOW
+================================================================================
+
+START
+  │
+  ▼
+┌────────────────────────────────────────┐
+│ Read .env.standalone                   │
+│ NEXT_PUBLIC_STANDALONE_MODE=true       │
+└────────────┬───────────────────────────┘
+             │
+             ▼
+┌────────────────────────────────────────┐
+│ Next.js Build (Static Export)         │
+│ - Compiles React components            │
+│ - Applies standalone config            │
+│ - Hides log analysis features          │
+│ - Generates static HTML/CSS/JS         │
+└────────────┬───────────────────────────┘
+             │
+             ▼
+┌────────────────────────────────────────┐
+│ Electron Packaging                     │
+│ - Wraps Next.js app                    │
+│ - Includes Electron runtime            │
+│ - Adds Node.js                         │
+│ - Creates window frame                 │
+└────────────┬───────────────────────────┘
+             │
+             ▼
+┌────────────────────────────────────────┐
+│ electron-builder                       │
+│ - Creates installer (.exe)             │
+│ - Creates portable (.exe)              │
+│ - Adds icons and metadata              │
+└────────────┬───────────────────────────┘
+             │
+             ▼
+┌────────────────────────────────────────┐
+│ OUTPUT: dist-electron/                 │
+│ ├─ Setup.exe         (Installer)       │
+│ ├─ Portable.exe      (No install)      │
+│ └─ win-unpacked/     (Folder)          │
+└────────────────────────────────────────┘
+             │
+             ▼
+           DONE! 🎉
+           Share files!
+
+
+================================================================================
+                     FEATURE TOGGLE MECHANISM
+================================================================================
+
+┌─────────────────────────────────────────────────────────────────┐
+│ Environment Variable                                            │
+│ NEXT_PUBLIC_STANDALONE_MODE=true                                │
+└────────────────────┬────────────────────────────────────────────┘
+                     │
+                     ▼
+┌─────────────────────────────────────────────────────────────────┐
+│ src/config/standalone.ts                                        │
+│                                                                 │
+│ export function shouldHideFeature(feature) {                    │
+│   if (isStandaloneMode()) {                                     │
+│     return feature === 'logs' || feature === 'analytics';       │
+│   }                                                             │
+│   return false;                                                 │
+│ }                                                               │
+└────────────────────┬────────────────────────────────────────────┘
+                     │
+                     ▼
+┌─────────────────────────────────────────────────────────────────┐
+│ src/components/common/Sidebar.tsx                               │
+│                                                                 │
+│ const navItems = allNavItems.filter(item => {                   │
+│   if (!item.feature) return true;                               │
+│   return !shouldHideFeature(item.feature); // Filter out!       │
+│ });                                                             │
+└────────────────────┬────────────────────────────────────────────┘
+                     │
+                     ▼
+              ┌──────────────┐
+              │ RESULT:      │
+              │ Logs Hidden  │
+              │ Analytics    │
+              │ Hidden       │
+              └──────────────┘
+
+
+================================================================================
+                        FILE SIZE BREAKDOWN
+================================================================================
+
+Component                           Size       Percentage
+---------                           ----       ----------
+Next.js Build (HTML/CSS/JS)         ~50 MB     ████████░░░░░░░░░░  25%
+Electron Runtime                    ~80 MB     ████████████████░░░░  40%
+Embedded Node.js                    ~40 MB     ████████░░░░░░░░░░  20%
+Application Icons/Assets            ~10 MB     ██░░░░░░░░░░░░░░░░   5%
+electron-builder Overhead           ~20 MB     ████░░░░░░░░░░░░░░  10%
+                                    -------    --------------------
+TOTAL PACKAGE                       ~200 MB    ████████████████████ 100%
+
+
+Installer adds compression:
+  - Installer.exe:  ~150 MB (compressed)
+  - Portable.exe:   ~200 MB (full size)
+
+
+================================================================================
+                    DISTRIBUTION OPTIONS
+================================================================================
+
+Option 1: INSTALLER (.exe)
+===========================
+OCA Sana Hub Setup 1.0.0.exe  (~150 MB)
+
+Pros:
+  ✅ Professional appearance
+  ✅ Creates Start Menu shortcuts
+  ✅ Creates Desktop shortcut
+  ✅ Easy to uninstall
+  ✅ Auto-updates possible (future)
+
+Cons:
+  ❌ Requires administrator rights
+  ❌ Installation process needed
+
+Best For:
+  - Long-term installations
+  - Multiple users on same PC
+  - Professional distribution
+
+
+Option 2: PORTABLE (.exe)
+==========================
+OCA Sana Hub 1.0.0.exe  (~200 MB)
+
+Pros:
+  ✅ No installation needed
+  ✅ Can run from USB
+  ✅ No admin rights needed
+  ✅ Move between computers easily
+  ✅ Test without installing
+
+Cons:
+  ❌ No shortcuts created
+  ❌ Larger file size
+  ❌ Manual placement needed
+
+Best For:
+  - Quick demos
+  - USB distribution
+  - Temporary use
+  - Testing
+
+
+Option 3: BOTH
+==============
+Share both versions!
+
+Let colleagues choose:
+  - Corporate IT prefers installer
+  - Quick demos use portable
+  - Power users like portable
+  - Standard users prefer installer
+
+
+================================================================================
+                      SECURITY FEATURES
+================================================================================
+
+Layer 1: Electron Context Isolation
+====================================
+┌──────────────────────────────────┐
+│ Main Process (Node.js)           │  ▲ Isolated
+│ - Full system access             │  │
+│ - File system                    │  │
+│ - Network                        │  │
+└──────────────────────────────────┘  │
+                                      │
+┌──────────────────────────────────┐  │
+│ Preload Script (Bridge)          │  │ Controlled
+│ - Limited API exposure           │  │ Communication
+└──────────────────────────────────┘  │
+                                      │
+┌──────────────────────────────────┐  │
+│ Renderer Process (React App)     │  ▼ Sandboxed
+│ - No Node.js access              │
+│ - Web security enabled           │
+│ - Content Security Policy        │
+└──────────────────────────────────┘
+
+Layer 2: Network Security
+==========================
+✅ HTTPS for all portal connections
+✅ No credential storage in app
+✅ Portal auth handled by browser
+✅ No data sent to external servers
+
+Layer 3: Application Security
+==============================
+✅ No remote code execution
+✅ Signed executable (optional)
+✅ Windows SmartScreen compatible
+✅ Antivirus friendly
+
+
+================================================================================
+                    TECHNOLOGY STACK
+================================================================================
+
+┌─────────────────────────────────────────────────────────────┐
+│                      DESKTOP APP STACK                      │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  Presentation Layer                                         │
+│  ┌────────────────────────────────────────────────────┐    │
+│  │ React 19 Components                                │    │
+│  │ - PortalGrid, PortalCard, Header, Sidebar         │    │
+│  └────────────────────────────────────────────────────┘    │
+│                           │                                 │
+│  Framework Layer          │                                 │
+│  ┌────────────────────────▼───────────────────────────┐    │
+│  │ Next.js 15 (Static Export)                         │    │
+│  │ - Server Side Rendering → Static HTML              │    │
+│  │ - API Routes → Bundled                             │    │
+│  └────────────────────────────────────────────────────┘    │
+│                           │                                 │
+│  Desktop Layer            │                                 │
+│  ┌────────────────────────▼───────────────────────────┐    │
+│  │ Electron 40                                        │    │
+│  │ - Chromium (web rendering)                         │    │
+│  │ - Node.js (system access)                          │    │
+│  │ - Native menus, windows, etc.                      │    │
+│  └────────────────────────────────────────────────────┘    │
+│                           │                                 │
+│  Operating System         │                                 │
+│  ┌────────────────────────▼───────────────────────────┐    │
+│  │ Windows 10/11, macOS, Linux                        │    │
+│  └────────────────────────────────────────────────────┘    │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+
+
+================================================================================
+                         TIMELINE
+================================================================================
+
+Development Phase (DONE! ✅)
+============================
+[✅] Install dependencies          (5 min)
+[✅] Create Electron files         (10 min)
+[✅] Setup standalone config       (10 min)
+[✅] Update components              (15 min)
+[✅] Configure build scripts       (10 min)
+[✅] Write documentation          (30 min)
+─────────────────────────────────────────
+Total Development: ~80 minutes
+
+
+Build Phase (Your Turn! 🚀)
+============================
+[ ] Run build script              (1 min)
+[ ] Install packages (if needed)  (2-5 min)
+[ ] Build Next.js                 (3-5 min)
+[ ] Package with Electron         (2-5 min)
+[ ] Create installers             (1-2 min)
+─────────────────────────────────────────
+Total Build Time: ~10 minutes
+
+
+Distribution Phase
+==================
+[ ] Locate files in dist-electron (1 min)
+[ ] Share .exe files              (varies)
+[ ] Send USER_GUIDE.md            (1 min)
+─────────────────────────────────────────
+Total Distribution: ~5 minutes
+
+
+User Experience (Your Colleagues)
+==================================
+[ ] Download .exe                 (varies)
+[ ] Double-click to run          (instant)
+[ ] Browse portals                (ongoing)
+─────────────────────────────────────────
+No setup time needed!
+
+
+================================================================================
+                        SUCCESS METRICS
+================================================================================
+
+✅ COMPLETE - Feature Hiding
+  - Log Analysis hidden in standalone mode
+  - Portal Analytics hidden in standalone mode
+  - Sidebar updated with conditional rendering
+  - Standalone config system created
+
+✅ COMPLETE - Desktop Configuration
+  - Electron main process created
+  - Security preload script added
+  - Build scripts configured
+  - Package.json updated with build config
+
+✅ COMPLETE - Documentation
+  - Simple build guide (BUILD_DESKTOP.md)
+  - Quick reference (STANDALONE_QUICKSTART.md)
+  - Full technical docs (docs/STANDALONE_DESKTOP.md)
+  - User guide for colleagues (USER_GUIDE.md)
+  - Visual overview (DESKTOP_BUILD_OVERVIEW.txt)
+  - Completion summary (DESKTOP_COMPLETE.md)
+
+✅ COMPLETE - Build System
+  - Windows build script (.bat)
+  - macOS/Linux build script (.sh)
+  - npm scripts configured
+  - Environment configuration
+
+✅ READY - Distribution
+  - Installer build configuration
+  - Portable build configuration
+  - Multi-platform support
+  - Icon configuration
+
+
+================================================================================
+                    WHAT'S NEXT? YOUR TURN!
+================================================================================
+
+TO BUILD:
+---------
+Just run:  build-standalone.bat
+
+Or:        npm run standalone:build:win
+
+
+TO TEST FIRST:
+--------------
+Run:       npm run standalone:dev
+(Opens Electron window with standalone mode enabled)
+
+
+TO SHARE:
+---------
+1. Find files in: dist-electron/
+2. Send to colleagues
+3. Include: USER_GUIDE.md
+
+
+NEED HELP?
+----------
+Check:
+  - BUILD_DESKTOP.md (simple)
+  - docs/STANDALONE_DESKTOP.md (detailed)
+  - Troubleshooting sections
+
+
+================================================================================
+                         CONGRATULATIONS! 🎉
+================================================================================
+
+Your OCA Sana Hub now has:
+  ✅ Full desktop application support
+  ✅ Clean presentation mode (features hidden)
+  ✅ Easy one-click build process
+  ✅ Complete documentation
+  ✅ User guides for colleagues
+  ✅ Professional distribution ready
+
+READY TO BUILD AND SHARE! 🚀
+
+================================================================================

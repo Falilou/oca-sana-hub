@@ -1,0 +1,52 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with rounded corners -->
+  <rect width="180" height="180" rx="40" fill="url(#gradient)"/>
+  
+  <!-- Gradient Definition -->
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1E40AF;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Glow Effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Globe Structure -->
+  <g filter="url(#glow)">
+    <!-- Outer Ring -->
+    <circle cx="90" cy="90" r="50" stroke="white" stroke-width="3" fill="none" opacity="0.3"/>
+    
+    <!-- Middle Ring -->
+    <circle cx="90" cy="90" r="39" stroke="white" stroke-width="2.5" fill="none" opacity="0.5"/>
+    
+    <!-- Inner Core -->
+    <circle cx="90" cy="90" r="18" fill="white" opacity="0.9"/>
+    
+    <!-- Vertical Lines -->
+    <ellipse cx="90" cy="90" rx="12" ry="50" stroke="white" stroke-width="1.8" fill="none" opacity="0.6"/>
+    <ellipse cx="90" cy="90" rx="25" ry="50" stroke="white" stroke-width="1.4" fill="none" opacity="0.4"/>
+    <ellipse cx="90" cy="90" rx="38" ry="50" stroke="white" stroke-width="1.4" fill="none" opacity="0.3"/>
+    
+    <!-- Horizontal Lines -->
+    <ellipse cx="90" cy="90" rx="50" ry="12" stroke="white" stroke-width="1.8" fill="none" opacity="0.6"/>
+    <ellipse cx="90" cy="90" rx="50" ry="25" stroke="white" stroke-width="1.4" fill="none" opacity="0.4"/>
+    <ellipse cx="90" cy="90" rx="50" ry="38" stroke="white" stroke-width="1.4" fill="none" opacity="0.3"/>
+    
+    <!-- Connection Nodes -->
+    <circle cx="90" cy="40" r="3" fill="white" opacity="0.9"/>
+    <circle cx="90" cy="140" r="3" fill="white" opacity="0.9"/>
+    <circle cx="40" cy="90" r="3" fill="white" opacity="0.9"/>
+    <circle cx="140" cy="90" r="3" fill="white" opacity="0.9"/>
+    
+    <!-- Central Text -->
+    <text x="90" y="98" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1E40AF" text-anchor="middle">OCA</text>
+  </g>
+</svg>

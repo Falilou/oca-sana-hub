@@ -1,0 +1,224 @@
+================================================================================
+                           OCA SANA HUB
+                      DESKTOP STANDALONE BUILD
+================================================================================
+
+📦 WHAT YOU'LL GET
+==================
+
+After building, you get these executable files:
+
+   Windows:
+   ├─ OCA Sana Hub Setup 1.0.0.exe    [Installer - 150MB]
+   └─ OCA Sana Hub 1.0.0.exe          [Portable - 200MB]
+
+   macOS:
+   └─ OCA Sana Hub-1.0.0.dmg          [DMG Installer - 150MB]
+
+   Linux:
+   ├─ OCA Sana Hub-1.0.0.AppImage     [AppImage - 170MB]
+   └─ oca-sana-hub_1.0.0_amd64.deb    [Debian Package]
+
+
+🎯 FEATURES COMPARISON
+======================
+
+                          Web App    Desktop Standalone
+                          -------    ------------------
+Portal Dashboard           ✅          ✅
+9 Country Portals          ✅          ✅
+Environment Switch         ✅          ✅
+Settings                   ✅          ✅
+Log Analysis              ✅          🚫 HIDDEN
+Portal Analytics          ✅          🚫 HIDDEN
+
+Requires Server           ✅          ❌
+Best For                  Dev         Presentations
+
+
+🚀 HOW TO BUILD
+===============
+
+EASY WAY (Windows):
+-------------------
+1. Double-click: build-standalone.bat
+2. Wait 5-10 minutes
+3. Done! Files in dist-electron folder
+
+
+COMMAND LINE WAY:
+-----------------
+npm run standalone:build:win       # Windows
+npm run standalone:build:mac       # macOS
+npm run standalone:build:linux     # Linux
+
+
+📤 HOW TO SHARE
+===============
+
+Option 1: Email/Drive
+---------------------
+→ Upload .exe file to Google Drive/OneDrive
+→ Share link with colleagues
+→ They download and run
+
+
+Option 2: USB Drive
+-------------------
+→ Copy .exe to USB
+→ Give to colleagues
+→ They copy to their computer and run
+
+
+Option 3: Network Share
+-----------------------
+→ Place on company file server
+→ Colleagues access via network path
+→ Double-click to run
+
+
+💻 WHAT YOUR COLLEAGUES NEED
+=============================
+
+Requirements:
+  ✅ Windows 10/11 (or Mac/Linux if built for those)
+  ✅ Internet connection (to access portals)
+  ❌ NO Node.js needed
+  ❌ NO npm needed
+  ❌ NO command line needed
+  ❌ NO technical skills needed
+
+Just double-click and it works!
+
+
+🎨 WHAT THEY'LL SEE
+===================
+
+Clean Interface With:
+  ✅ Portal Dashboard (main screen)
+  ✅ 9 Country Portal Cards
+  ✅ Environment Switcher (PROD/INDUS)
+  ✅ Settings Menu
+  🚫 No Log Analysis (hidden)
+  🚫 No Analytics Dashboard (hidden)
+
+Perfect for professional presentations!
+
+
+⏱️  BUILD TIMELINE
+==================
+
+Step 1: Install Packages        [0-2 min]  ████████░░
+Step 2: Build Next.js           [2-5 min]  ██████████
+Step 3: Package Electron        [5-8 min]  ████████░░
+Step 4: Create Installer        [8-10 min] ████████░░
+
+Total Time: ~10 minutes
+
+
+📊 FILE SIZES
+=============
+
+Component                Size
+---------                ----
+Next.js Build            ~50 MB
+Electron Runtime         ~100 MB
+Node.js Embedded         ~50 MB
+Total Package            ~200 MB
+
+Note: One-time build, unlimited sharing!
+
+
+🔒 SECURITY NOTES
+=================
+
+✅ Standalone app uses same security as Electron apps
+✅ No backend server = less attack surface
+✅ Portal credentials sent via HTTPS only
+✅ No data stored locally (except localStorage)
+✅ Context isolation enabled
+✅ Node integration disabled
+
+
+📋 PRE-BUILD CHECKLIST
+======================
+
+Before building for colleagues:
+
+  [ ] Portal URLs configured in .env.standalone
+  [ ] Tested in dev mode (npm run standalone:dev)
+  [ ] Verified all portals accessible
+  [ ] Updated logo if needed (public/oca-logo.png)
+  [ ] Checked application name in package.json
+  [ ] Have 5 GB free disk space
+  [ ] Internet connection available
+
+
+🎓 FIRST TIME BUILDER?
+======================
+
+Don't worry! The process is automated.
+
+Just run:  build-standalone.bat
+
+The script will:
+  1. Check if dependencies installed
+  2. Auto-install if needed
+  3. Build the app
+  4. Create executables
+  5. Show you where files are
+
+No experience needed!
+
+
+📞 TROUBLESHOOTING
+==================
+
+Problem: "npm not found"
+Fix: Install Node.js from nodejs.org
+
+Problem: Build fails
+Fix: Try: npm install --save-dev electron electron-builder
+
+Problem: "Out of memory"
+Fix: Close other apps, try again
+
+Problem: Takes too long
+Fix: Normal on first build, faster next time
+
+
+🎯 QUICK COMMANDS
+=================
+
+Test before building:
+  npm run standalone:dev
+
+Build for Windows:
+  npm run standalone:build:win
+
+Build step-by-step:
+  npm install
+  npm run standalone:export
+  npx electron-builder --win
+
+
+📚 MORE HELP
+============
+
+Detailed Guides:
+  → BUILD_DESKTOP.md           (Simple guide)
+  → STANDALONE_QUICKSTART.md   (Quick reference)
+  → docs/STANDALONE_DESKTOP.md (Full documentation)
+
+
+================================================================================
+                         READY TO BUILD? 🚀
+================================================================================
+
+Run: build-standalone.bat
+
+Then share the .exe file from dist-electron folder!
+
+Your colleagues will love the clean, professional interface!
+
+================================================================================

@@ -1,0 +1,86 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "npm: install",
+      "type": "shell",
+      "command": "npm",
+      "args": ["install"],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "npm: dev",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "dev"],
+      "isBackground": true,
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^.*$",
+          "file": 1,
+          "location": 2,
+          "message": 3
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*ready started server on.*$",
+          "endsPattern": "^.*ready on.*$"
+        }
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "npm: build",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "build"],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "problemMatcher": ["$tsc"],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "npm: lint",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "lint"],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "problemMatcher": ["$eslint-stylish"],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    }
+  ]
+}
